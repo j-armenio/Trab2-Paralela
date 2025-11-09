@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "knn.h": "c",
+        "stdlib.h": "c"
+    }
+}

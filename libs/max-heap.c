@@ -2,9 +2,6 @@
 #include <stdio.h>
 #include <math.h>
 
-// para compilar:
-// gcc -O3 max-heap.c -o max-heap -lm
-
 #define MAX_HEAP_SIZE (1024*1024)
 
 // ------- FUNCOES AUXILIARES ------- //
@@ -15,47 +12,38 @@ void printNSpaces(int n)
         printf(" ");
 }
 
-void drawHeapTree(int heap[], int size, int n_levels)
+__attribute__((always_inline)) inline void swapFloat(float *a, float *b)
 {
-    int offset = 0;
-    int space = (int) pow(2, n_levels-1);
-    int n_elements = 1;
-
-    for (int level=0; level < n_levels; ++level) {
-        // printa todos elementos nesse nivel
-        for(int i=offset; i < size && i < (offset+n_elements); i++) {
-            printNSpaces(((pow(2,n_levels-1-level))*2)-2);
-            printf("[%2d]", heap[i]);
-            printNSpaces(((pow(2,n_levels-1-level))*2)-2);
-        }
-        printf("\n");
-
-        offset += n_elements;
-        space = n_elements-1;
-        n_elements *= 2;
-    }
+    float temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
-__attribute__((always_inline)) inline void swap(int *a, int *b)
+__attribute__((always_inline)) inline void swapInt(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-void maxHeapify(int heap[], int size, int i)
+#define parent(pos) ((pos-1)/2)
+
+void maxHeapify(float heap[], int size, int i, int idx[])
 {
     while (1) {
         int largest = i;
-        int left = 2*i+1;
-        int right = 2*i+2;
+        int left    = 2 * i + 1;
+        int right   = 2 * i + 2;
 
         if (left < size && heap[left] > heap[largest])
             largest = left;
+
         if (right < size && heap[right] > heap[largest])
             largest = right;
+
         if (largest != i) {
-            swap(&heap[i], &heap[largest]);
+            swapFloat(&heap[i], &heap[largest]);
+            swapInt(&idx[i], &idx[largest]);
             i = largest;
         } else {
             break;
@@ -63,41 +51,45 @@ void maxHeapify(int heap[], int size, int i)
     }
 }
 
-#define parent(pos) ((pos-1)/2)
-
-void heapifyUp(int heap[], int pos)
+void heapifyUp(float heap[], int pos, int idx[])
 {
-    int val = heap[pos];
+    float val = heap[pos];
+    int id = idx[pos];
+
     while (pos > 0 && val > heap[parent(pos)]) {
         heap[pos] = heap[parent(pos)];
+        idx[pos] = idx[parent(pos)];
         pos = parent(pos);
     }
     heap[pos] = val;
+    idx[pos] = id;
 }
 
 // ------- OPERACOES MAX-HEAP ------- //
 
-void decreaseMax(int heap[], int size, int new_value)
+void decreaseMax(float heap[], int size, float new_value, int idx[], int new_idx)
 {
     if (size == 0) // heap vazia
         return;
 
     if (heap[0] > new_value) {
         heap[0] = new_value;
-        maxHeapify(heap, size, 0);
+        idx[0] = new_idx;
+        maxHeapify(heap, size, 0, idx);
     }
 }
 
-void insert(int heap[], int *size, int element)
+void insert(float heap[], int *size, float element, int idx[], int new_idx)
 {
     *size += 1;
     int last = *size - 1;
 
     heap[last] = element;
-    heapifyUp(heap, last);
+    idx[last] = new_idx;
+    heapifyUp(heap, last, idx);
 }
 
-int isMaxHeap(int heap[], int size)
+int isMaxHeap(float heap[], int size)
 {
     for (int i=1; i < size; i++){
         if (heap[i] <= heap[parent(i)])
@@ -107,4 +99,21 @@ int isMaxHeap(int heap[], int size)
         }
     }
     return 1;
+}
+
+// Constrói uma heap a partir de um vetor arbitrário de valores
+void buildMaxHeap(float heap[], int size, int idx[])
+{
+    for (int i = size / 2 - 1; i >= 0; i--)
+        maxHeapify(heap, size, i, idx);
+}
+
+// ordena os k vizinhos em ordem crescente com heapsort
+void heapSortMax(float heap[], int size, int idx[])
+{
+    for (int end = size - 1; end > 0; --end) {
+        swapFloat(&heap[0], &heap[end]);
+        swapInt(&idx[0], &idx[end]);
+        maxHeapify(heap, end, 0, idx);
+    }
 }
