@@ -20,9 +20,19 @@ void printMatFloat(float **M, int linhas, int colunas)
     }
 }
 
-void geraConjuntoDeDadosBuf(float *C, int nc, int d)
+void geraConjuntoDeDados(float *C, int nc, int d)
 {
     for (int i = 0; i < nc; ++i)
         for (int j = 0; j < d; ++j)
             C[i*d + j] = (float)rand() / (float)RAND_MAX;
+}
+
+// Cria um vetor de ponteiros 2D apontando pra um buf contiguo
+float **make2D(float *buf, int rows, int D) 
+{
+    float **M = (float **)malloc(rows * sizeof(float *));
+    for (int i=0; i < rows; ++i)
+        M[i] = &buf[(size_t)i * D];
+    
+    return M;
 }

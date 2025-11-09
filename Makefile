@@ -1,5 +1,5 @@
 # Compilador
-CC = gcc
+CC = mpicc
 
 # Flags de compilação
 CFLAGS = -O3 -Wall -Ilibs
@@ -20,7 +20,7 @@ LIB_OBJS = $(patsubst $(LIB_DIR)/%.c,$(OBJ_DIR)/%.o,$(LIB_SRCS))
 MAIN_OBJ = $(OBJ_DIR)/main.o
 
 # Executável
-TARGET = knn
+TARGET = knn-mpi
 
 # regra padrão
 all: $(TARGET)

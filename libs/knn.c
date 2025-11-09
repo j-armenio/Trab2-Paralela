@@ -24,7 +24,7 @@ float squaredDist(const float *a, const float *b, int D)
     D  = número de dimensoes dos pontos
     k  = tamanho dos conjuntos de pontos vizinhos buscados
 */
-int **knnSequencial(float **Q, int nq, float **P, int n, int D, int k)
+int **knn(float **Q, int nq, float **P, int n, int D, int k)
 {
     // aloca matriz de resultados R
     int **R = (int **)malloc(nq * sizeof(int *));
@@ -60,9 +60,4 @@ int **knnSequencial(float **Q, int nq, float **P, int n, int D, int k)
 
     free(heap);
     return R;
-}
-
-int **knnMPI()
-{
-
 }
