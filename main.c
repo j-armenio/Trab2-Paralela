@@ -4,6 +4,7 @@
 #include <mpi.h>
 #include "libs/knn.h"
 #include "libs/aux.h"
+#include "libs/verificaKNN.c"
 
 #define Q_POINTS_AMT 128
 #define P_POINTS_AMT 400000
@@ -59,6 +60,12 @@ int main(int argc, char **argv)
     k   = params[3];
 
     const int n = npp; // só pq eu uso n daq p frente, nao npp
+
+    int verify = 0;
+    for (int i=0; i < argc; ++i) {
+        if (strcmp(argv[i], "-v") == 0)
+            verify = 1;
+    }
 
     float *Q = NULL;
     float *P = NULL;
@@ -196,7 +203,10 @@ int main(int argc, char **argv)
         printf("Tempo KNN: %.3f s\n", t1 - t0);
     }
 
-    // ------------- Verificação caso -v em argv -------------
+    // Verificação caso -v em argv
+    if (rank == 0 && verify == 1) {
+        verificaKNN(Q, nq, P, n, D, k, R);
+    }
 
     // libera memoria
     for (int i = 0; i < local_nq; ++i) 
