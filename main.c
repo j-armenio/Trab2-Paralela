@@ -31,6 +31,15 @@ int main(int argc, char **argv)
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
 
+    // Get the name of the processor
+    char processor_name[MPI_MAX_PROCESSOR_NAME];
+    int name_len;
+    MPI_Get_processor_name(processor_name, &name_len);
+
+    // Print node info
+    printf("Host %s has rank %d out of %d MPI processes\n",
+           processor_name, rank, nprocs);
+
     // valores default
     int nq = Q_POINTS_AMT; // número de pontos em Q
     int npp = P_POINTS_AMT;  // número de pontos em P
