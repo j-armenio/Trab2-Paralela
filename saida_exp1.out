@@ -1,0 +1,5 @@
+==============================================
+Executando Experiência 1 (1 processo MPI)
+==============================================
+Host wz16 has rank 0 out of 1 MPI processes
+Tempo KNN: 27.299 s

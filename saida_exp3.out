@@ -1,0 +1,12 @@
+==============================================
+Executando Experiência 3 (8 processos em 4 nós — 2 por nó)
+==============================================
+Host wz10 has rank 0 out of 8 MPI processes
+Host wz10 has rank 1 out of 8 MPI processes
+Host wz12 has rank 5 out of 8 MPI processes
+Host wz15 has rank 7 out of 8 MPI processes
+Host wz15 has rank 6 out of 8 MPI processes
+Host wz12 has rank 4 out of 8 MPI processes
+Host wz11 has rank 3 out of 8 MPI processes
+Host wz11 has rank 2 out of 8 MPI processes
+Tempo KNN: 4.047 s

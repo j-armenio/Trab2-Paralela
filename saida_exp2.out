@@ -1,0 +1,12 @@
+==============================================
+Executando Experiência 2 (8 processos no mesmo nó)
+==============================================
+Host wz16 has rank 0 out of 8 MPI processes
+Host wz16 has rank 4 out of 8 MPI processes
+Host wz16 has rank 2 out of 8 MPI processes
+Host wz16 has rank 3 out of 8 MPI processes
+Host wz16 has rank 6 out of 8 MPI processes
+Host wz16 has rank 5 out of 8 MPI processes
+Host wz16 has rank 1 out of 8 MPI processes
+Host wz16 has rank 7 out of 8 MPI processes
+Tempo KNN: 10.370 s
