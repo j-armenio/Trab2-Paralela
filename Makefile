@@ -2,8 +2,8 @@
 CC = mpicc
 
 # Flags de compilação
-CFLAGS = -O3 -Wall -Ilibs
-LDFLAGS = -lm
+CFLAGS = -O3 -Wall -Ilibs -fopenmp
+LDFLAGS = -lm -fopenmp
 
 # Diretórios
 LIB_DIR = libs
@@ -20,7 +20,7 @@ LIB_OBJS = $(patsubst $(LIB_DIR)/%.c,$(OBJ_DIR)/%.o,$(LIB_SRCS))
 MAIN_OBJ = $(OBJ_DIR)/main.o
 
 # Executável
-TARGET = knn-mpi
+TARGET = knn_mpi_omp
 
 # regra padrão
 all: $(TARGET)

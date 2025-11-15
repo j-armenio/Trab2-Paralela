@@ -1,0 +1,185 @@
+=== INICIANDO EXPERIMENTOS ===
+EXPERIÊNCIA 1: 2 MPI × 8 threads
+Execução 1/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 18.979 s
+----------------------------------------
+Execução 2/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 18.944 s
+----------------------------------------
+Execução 3/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 19.104 s
+----------------------------------------
+Execução 4/10:
+Host wz00 has rank 1 out of 2 MPI processes
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Tempo KNN: 19.022 s
+----------------------------------------
+Execução 5/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 19.089 s
+----------------------------------------
+Execução 6/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 19.000 s
+----------------------------------------
+Execução 7/10:
+Host wz00 has rank 1 out of 2 MPI processes
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Tempo KNN: 18.967 s
+----------------------------------------
+Execução 8/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 19.099 s
+----------------------------------------
+Execução 9/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 19.003 s
+----------------------------------------
+Execução 10/10:
+Host wz00 has rank 0 out of 2 MPI processes
+Configuração: 2 processos MPI, 8 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 1 out of 2 MPI processes
+Tempo KNN: 19.094 s
+----------------------------------------
+EXPERIÊNCIA 2: 4 MPI × 4 threads
+Execução 1/10:
+Host wz00 has rank 0 out of 4 MPI processes
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Tempo KNN: 8.472 s
+----------------------------------------
+Execução 2/10:
+Host wz00 has rank 1 out of 4 MPI processes
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 2 out of 4 MPI processes
+Tempo KNN: 8.351 s
+----------------------------------------
+Execução 3/10:
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Tempo KNN: 8.460 s
+----------------------------------------
+Execução 4/10:
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Tempo KNN: 8.655 s
+----------------------------------------
+Execução 5/10:
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Tempo KNN: 8.437 s
+----------------------------------------
+Execução 6/10:
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Tempo KNN: 8.539 s
+----------------------------------------
+Execução 7/10:
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Tempo KNN: 8.473 s
+----------------------------------------
+Execução 8/10:
+Host wz00 has rank 1 out of 4 MPI processes
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 2 out of 4 MPI processes
+Tempo KNN: 8.665 s
+----------------------------------------
+Execução 9/10:
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Host wz00 has rank 3 out of 4 MPI processes
+Tempo KNN: 8.512 s
+----------------------------------------
+Execução 10/10:
+Host wz00 has rank 0 out of 4 MPI processes
+Configuração: 4 processos MPI, 4 threads por processo
+Total de núcleos: 16
+Parâmetros: nq=128, npp=400000, D=300, k=1024
+Host wz00 has rank 2 out of 4 MPI processes
+Host wz00 has rank 3 out of 4 MPI processes
+Host wz00 has rank 1 out of 4 MPI processes
+Tempo KNN: 8.476 s
+----------------------------------------
+EXPERIMENTOS CONCLUÍDOS!
+

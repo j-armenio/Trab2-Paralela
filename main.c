@@ -2,14 +2,43 @@
 #include <stdlib.h>
 #include <string.h>
 #include <mpi.h>
+#include <omp.h>
 #include "libs/knn.h"
 #include "libs/aux.h"
 #include "libs/verificaKNN.c"
+#include "libs/max-heap.h"
 
 #define Q_POINTS_AMT 128
 #define P_POINTS_AMT 400000
 #define DIMENSIONS 300
 #define K_NEIGHBORS 1024
+
+// Função auxiliar para calcular KNN de um único ponto
+void knn_single_point(float *Q_point, float **P, int n, int D, int k, int *result) {
+    float *heap = (float *)malloc(k * sizeof(float));
+    
+    // Inicializa heap com k primeiros pontos de P
+    for (int j = 0; j < k; j++) {
+        heap[j] = squaredDist(Q_point, P[j], D);
+        result[j] = j;
+    }
+    
+    // Constrói max-heap
+    buildMaxHeap(heap, k, result);
+    
+    // Processa pontos restantes de P
+    for (int j = k; j < n; j++) {
+        float dist = squaredDist(Q_point, P[j], D);
+        if (dist < heap[0]) {
+            decreaseMax(heap, k, dist, result, j);
+        }
+    }
+    
+    // Ordena resultados
+    heapSortMax(heap, k, result);
+    
+    free(heap);
+}
 
 // trata o input e faz a valoração dos parametros
 int parse_arg(const char *name, int def, int argc, char **argv)
@@ -30,6 +59,16 @@ int main(int argc, char **argv)
     int rank = 0, nprocs = 1;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &nprocs);
+
+    // =========== PARÂMETRO DE THREADS ===========
+    int num_threads = 1;
+    for (int i=1; i < argc; ++i) {
+        if (strncmp(argv[i], "-t=", 3) == 0) {
+            num_threads = atoi(argv[i] + 3);
+            break;
+        }
+    }
+    // ============================================
 
     // Get the name of the processor
     char processor_name[MPI_MAX_PROCESSOR_NAME];
@@ -53,6 +92,19 @@ int main(int argc, char **argv)
         npp = parse_arg("npp", npp, argc, argv);
         D   = parse_arg("d",   D,   argc, argv);
         k   = parse_arg("k",   k,   argc, argv);
+        
+        // Também verifica parâmetro -t no rank 0 para mostrar info
+        for (int i=1; i < argc; ++i) {
+            if (strncmp(argv[i], "-t=", 3) == 0) {
+                num_threads = atoi(argv[i] + 3);
+                break;
+            }
+        }
+        
+        printf("Configuração: %d processos MPI, %d threads por processo\n", nprocs, num_threads);
+        printf("Total de núcleos: %d\n", nprocs * num_threads);
+        printf("Parâmetros: nq=%d, npp=%d, D=%d, k=%d\n", nq, npp, D, k);
+        
         if (nq <= 0 || npp <= 0 || D <= 0 || k <= 0) {
             printf("Parâmetros inválidos.\n");
             MPI_Abort(MPI_COMM_WORLD, 1);
@@ -170,7 +222,17 @@ int main(int argc, char **argv)
     MPI_Barrier(MPI_COMM_WORLD);
     double t0 = MPI_Wtime();
 
-    int **local_R = knn(local_Q_data, local_nq, P_data, n, D, k);
+    // MODIFICAÇÃO: KNN paralelizado com OpenMP
+    int **local_R = (int **)malloc(local_nq * sizeof(int *));
+    
+    #pragma omp parallel num_threads(num_threads)
+    {
+        #pragma omp for schedule(static)
+        for (int i = 0; i < local_nq; i++) {
+            local_R[i] = (int *)malloc(k * sizeof(int));
+            knn_single_point(local_Q_data[i], P_data, n, D, k, local_R[i]);
+        }
+    }
 
     // ===============================
 
